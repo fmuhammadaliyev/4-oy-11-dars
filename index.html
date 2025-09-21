@@ -3,15 +3,186 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>11-dars.4-oy</title>
-    <link rel="stylesheet" href="./css/input.css" />
+    <link rel="stylesheet" href="./css/output.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Imtihon</title>
   </head>
-  <body>
-    <button id="btm">dark</button>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo aliquid
-    corporis commodi facilis, explicabo inventore accusantium aliquam! Quaerat
-    deserunt sunt assumenda pariatur praesentium eius, dolorem, consequuntur
-    facere magni fugiat amet?
-    <script src="./js/app.js"></script>
+  <body class="bg-gray-100">
+    <div class="max-w-[1000px] mx-auto p-6">
+      <div class="flex justify-between items-center mb-6">
+        <!-- Dark Mode -->
+        <button
+          id="btn"
+          type="button"
+          class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2"
+        >
+          🌙
+        </button>
+
+        <!-- Add Car -->
+        <button
+          id="openAddModal"
+          class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2"
+        >
+          Yangi Avtomobil
+        </button>
+
+        <!-- Avto sahifa -->
+        <a
+          href="./pages/avto.html"
+          target="_blank"
+          class="text-white bg-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5"
+        >
+          Avtomobillarni ko‘rish
+        </a>
+      </div>
+
+      <!-- Mashinalar shu yerga chiqadi -->
+      <div
+        id="carContainer"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+      ></div>
+    </div>
+
+    <!-- ✏️ Edit Modal -->
+    <div
+      id="editModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-xl shadow-lg w-[400px]">
+        <h2 class="text-lg font-bold mb-4">Moshina tahrirlash</h2>
+
+        <input
+          id="editName"
+          type="text"
+          placeholder="Nomi"
+          class="w-full border rounded-lg px-3 py-2 mb-2"
+        />
+        <textarea
+          id="editDescription"
+          placeholder="Ta'rif"
+          class="w-full border rounded-lg px-3 py-2 mb-2"
+        ></textarea>
+        <input
+          id="editCountry"
+          type="text"
+          placeholder="Davlat"
+          class="w-full border rounded-lg px-3 py-2 mb-2"
+        />
+        <input
+          id="editColor"
+          type="text"
+          placeholder="Rangi"
+          class="w-full border rounded-lg px-3 py-2 mb-4"
+        />
+
+        <div class="flex justify-end gap-4">
+          <button id="cancelEdit" class="px-4 py-2 bg-gray-300 rounded-lg">
+            Bekor qilish
+          </button>
+          <button
+            id="saveEdit"
+            class="px-4 py-2 bg-blue-600 text-white rounded-lg"
+          >
+            Saqlash
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="deleteModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-xl shadow-lg w-[300px] text-center">
+        <h2 class="text-lg font-bold mb-4">Rostdan ham ochirasizmi?</h2>
+        <div class="flex justify-center gap-4">
+          <button
+            id="confirmDelete"
+            class="px-4 py-2 bg-red-600 text-white rounded-lg"
+          >
+            Ha
+          </button>
+          <button id="cancelDelete" class="px-4 py-2 bg-gray-300 rounded-lg">
+            Yoq
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      id="detailModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 justify-center items-center"
+    >
+      <div class="bg-white rounded-xl shadow-lg w-[400px] p-6">
+        <h2 class="text-xl font-bold mb-4">Moshina malumotlari</h2>
+        <div id="detailContent" class="space-y-2 text-sm text-gray-700"></div>
+        <div class="mt-4 flex justify-end">
+          <button
+            id="closeDetail"
+            class="bg-red-500 text-white px-4 py-2 rounded-lg"
+          >
+            Yopish
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="addModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-bold mb-4 text-center text-black">
+          Yangi Moshina Qo‘shish
+        </h2>
+
+        <input
+          type="text"
+          id="addName"
+          placeholder="Nomi"
+          class="border w-full p-2 rounded mb-2"
+        />
+        <textarea
+          id="addDescription"
+          placeholder="Tavsif"
+          class="border w-full p-2 rounded mb-2"
+        ></textarea>
+        <input
+          type="text"
+          id="addCountry"
+          placeholder="Davlat"
+          class="border w-full p-2 rounded mb-2"
+        />
+        <input
+          type="text"
+          id="addCategory"
+          placeholder="Turkum (SUV, Sedan...)"
+          class="border w-full p-2 rounded mb-2"
+        />
+        <input
+          type="text"
+          id="addColor"
+          placeholder="Rang"
+          class="border w-full p-2 rounded mb-4"
+        />
+
+        <div class="flex justify-center gap-4">
+          <button
+            id="saveAdd"
+            class="bg-black text-white px-4 py-2 rounded-lg hover:bg-black"
+          >
+            Qoshish
+          </button>
+          <button
+            id="cancelAdd"
+            class="bg-gray-400 text-white px-4 py-2 rounded-lg hover:bg-gray-500"
+          >
+            Bekor qilish
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
+    <script src="./js/app.js" type="module"></script>
   </body>
 </html>
